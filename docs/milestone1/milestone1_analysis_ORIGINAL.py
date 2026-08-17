@@ -1,15 +1,15 @@
-## QSS 20 Final Project -- Milestone 1
-## Country-level neurological workforce vs. neurological disease burden
-## Starter analysis and visualizations
+# QSS 20 Final Project: Milestone 1
+# Country-level neurological workforce vs. neurological disease burden
+# Starter analysis and visualizations
 
 import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-## ---------------------------------------------------------------
-## 1. Read in the data extracted from the WHO Neurology Atlas (2017)
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# 1. Read in the data extracted from the WHO Neurology Atlas (2017)
+# ---------------------------------------------------------------
 
 countries = pd.read_csv("data/atlas_countries.csv")
 by_income = pd.read_csv("data/atlas_workforce_by_income.csv")
@@ -21,13 +21,13 @@ print()
 print(by_income[["income_group", "total_workforce_per100k",
                  "adult_neurologists_per100k", "pct_countries_rural"]])
 
-## ---------------------------------------------------------------
-## 2. Descriptive: how the 133 Atlas countries distribute across strata
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# 2. Descriptive: how the 133 Atlas countries distribute across strata
+# ---------------------------------------------------------------
 
-## normalize the income labels in the country crosswalk so they merge
-## onto the aggregate tables (the Annex writes "Lower-middle income",
-## the results tables write "Lower-middle-income")
+# normalize the income labels in the country crosswalk so they merge
+# onto the aggregate tables (the Annex writes "Lower-middle income",
+# the results tables write "Lower-middle-income")
 label_map = {"Low-income": "Low-income",
              "Lower-middle income": "Lower-middle-income",
              "Upper-middle income": "Upper-middle-income",
@@ -41,7 +41,7 @@ print()
 print(merged[["income_group", "n_countries", "total_workforce_per100k",
               "adult_neurologists_per100k", "pct_countries_rural"]])
 
-## the headline gap the project is built around
+# the headline gap the project is built around
 low = by_income.loc[by_income["income_group"] == "Low-income",
                     "adult_neurologists_per100k"].values[0]
 high = by_income.loc[by_income["income_group"] == "High-income",
@@ -49,15 +49,15 @@ high = by_income.loc[by_income["income_group"] == "High-income",
 print()
 print("adult neurologist density ratio, high- vs low-income:", round(high / low, 1))
 
-## cross-tab of WHO region by income group, which is the stratification
-## the burden merge will eventually be checked against
+# cross-tab of WHO region by income group, which is the stratification
+# the burden merge will eventually be checked against
 xtab = pd.crosstab(countries["who_region"], countries["income_group"])
 print()
 print(xtab)
 
-## ---------------------------------------------------------------
-## 3. Figure 1: neurological workforce density by income group
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# 3. Figure 1: neurological workforce density by income group
+# ---------------------------------------------------------------
 
 plot_inc = by_income[by_income["income_group"] != "Global"]
 
@@ -74,9 +74,9 @@ plt.tight_layout()
 plt.savefig("figures/fig1_workforce_by_income.png", dpi=200)
 plt.close()
 
-## ---------------------------------------------------------------
-## 4. Figure 2: where those providers actually practise
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# 4. Figure 2: where those providers actually practice
+# ---------------------------------------------------------------
 
 positions = range(len(plot_inc))
 width = 0.27
@@ -92,11 +92,11 @@ for off, col in zip(offsets, cols):
 plt.xticks(list(positions), plot_inc["income_group"], rotation=20, ha="right", fontsize=8)
 plt.ylabel("% of responding countries")
 plt.xlabel("World Bank income group")
-plt.title("Where neurologists practise, by income group")
+plt.title("Where neurologists practice, by income group")
 plt.ylim(0, 132)
 plt.legend(fontsize=8, loc="upper center", ncol=3, frameon=False)
 plt.tight_layout()
-plt.savefig("figures/fig2_where_neurologists_practise.png", dpi=200)
+plt.savefig("figures/fig2_where_neurologists_practice.png", dpi=200)
 plt.close()
 
 print()
