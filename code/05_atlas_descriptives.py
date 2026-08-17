@@ -1,15 +1,15 @@
-## 05_atlas_descriptives.py
-## Takes in : data/raw/atlas_workforce_by_income.csv
-##            data/raw/atlas_workforce_by_region.csv
-##            data/raw/atlas_country_crosswalk.csv
-## Does     : reproduces the two aggregate descriptives from the WHO/WFN Neurology
-##            Atlas that provide the backdrop for the country-level analysis in
-##            04_analyze.py. These rest on 114 responding countries -- roughly six
-##            times the country-level sample -- so they establish the gradient at
-##            a scale the GDO extract cannot reach.
-## Outputs  : output/fig4_atlas_workforce_by_income.png
-##            output/fig5_atlas_where_neurologists_practise.png
-##            output/table3_atlas_gradients.csv
+# 05_atlas_descriptives.py
+# Takes in: data/raw/atlas_workforce_by_income.csv
+#           data/raw/atlas_workforce_by_region.csv
+#           data/raw/atlas_country_crosswalk.csv
+# Does: reproduces the two aggregate descriptives from the WHO/WFN Neurology
+# Atlas that provide the backdrop for the country-level analysis in
+# 04_analyze.py. These rest on 114 responding countries, roughly six
+# times the country-level sample, so they establish the gradient at
+# a scale the GDO extract cannot reach.
+# Outputs: output/fig4_atlas_workforce_by_income.png
+#          output/fig5_atlas_where_neurologists_practise.png
+#          output/table3_atlas_gradients.csv
 
 import os
 import pandas as pd
@@ -27,10 +27,10 @@ cross = pd.read_csv(RAW + "atlas_country_crosswalk.csv")
 print("income-group rows:", len(by_income), " region rows:", len(by_region))
 print("crosswalk countries with an ISO3 match:", len(cross))
 
-## ---------------------------------------------------------------
-## The two headline gradients, reported as ratios so that they are
-## directly comparable with the share ratio used in 04_analyze.py
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# The two gradients, reported as ratios so that they are
+# directly comparable with the share ratio used in 04_analyze.py
+# ---------------------------------------------------------------
 
 def val(df, grp, col):
     return df.loc[df["income_group"] == grp, col].values[0]
@@ -52,9 +52,9 @@ print()
 print("Read the ratio column as: a value of 158.3 means a high-income country has")
 print("158 times as many adult neurologists per head as a low-income country.")
 
-## ---------------------------------------------------------------
-## Figure 4: the aggregate scarcity gradient
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# Figure 4: the aggregate scarcity gradient
+# ---------------------------------------------------------------
 
 plot_inc = by_income[by_income["income_group"] != "Global"].copy()
 global_med = val(by_income, "Global", "total_workforce_per100k")
@@ -88,11 +88,11 @@ ax.set_xlabel("World Bank income group")
 ax.set_ylim(0, 8.4)
 ax.yaxis.grid(True, color="#e6e6e6", linewidth=0.8, zorder=0)
 ax.set_axisbelow(True)
-ax.set_title("Context. Neurological workforce density rises 71-fold from low- to\n"
+ax.set_title("Context: Neurological workforce density rises 71-fold from low- to\n"
              "high-income countries (WHO Neurology Atlas, 114 responding countries)",
              fontsize=11.5)
 plt.figtext(0.01, 0.005,
-            "Median of the total neurological workforce (adult neurologists + neurosurgeons + child neurologists) per 100 000 population, by World Bank income\n"
+            "Median of the total neurological workforce (adult neurologists + neurosurgeons + child neurologists) per 100,000 population, by World Bank income\n"
             "group. Source: WHO/WFN Atlas: Country Resources for Neurological Disorders, 2nd ed. (2017), Figure 12. Counts under each bar are the number of\n"
             "countries answering that item; because these are medians of country values, they are not population-weighted.",
             fontsize=7, ha="left")
@@ -100,9 +100,9 @@ plt.tight_layout(rect=[0, 0.075, 1, 1])
 plt.savefig("output/fig4_atlas_workforce_by_income.png", dpi=200)
 plt.close()
 
-## ---------------------------------------------------------------
-## Figure 5: the same countries, disaggregated by where staff practise
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# Figure 5: the same countries, disaggregated by where staff practice
+# ---------------------------------------------------------------
 
 cols = ["pct_countries_capital", "pct_countries_other_urban", "pct_countries_rural"]
 labels = ["Capital city", "Other urban areas", "Rural areas"]
@@ -135,7 +135,7 @@ ax.set_title("Context. Capital-city coverage is near-universal at every income l
              "rural coverage collapses from 45% to 0% (WHO Neurology Atlas, n = 114)",
              fontsize=11.5)
 plt.figtext(0.01, 0.005,
-            "Share of responding countries reporting that neurologists practise in each setting, by World Bank income group. A country can report more than one\n"
+            "Share of responding countries reporting that neurologists practice in each setting, by World Bank income group. A country can report more than one\n"
             "setting, so bars within a group do not sum to 100%. Source: WHO/WFN Atlas: Country Resources for Neurological Disorders, 2nd ed. (2017), Figure 16;\n"
             "114 responding countries. This is the aggregate counterpart to Figure 3, which measures the same gradient country by country in the WHO GDO extract.",
             fontsize=7, ha="left")
