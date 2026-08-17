@@ -1,10 +1,10 @@
-## 01_extract_atlas_pdf.py
-## Takes in : the WHO/WFN Neurology Atlas 2nd edition PDF (ISBN 978-92-4-156550-9),
-##            downloaded separately -- see the data note in README.md
-## Does     : parses Annex 1 (pages 67-70 of the PDF) into a country ->
-##            WHO region -> World Bank income group crosswalk, repairing the two
-##            rows whose country name wraps across a line break
-## Outputs  : data/raw/atlas_country_crosswalk.csv
+# 01_extract_atlas_pdf.py
+# Takes in: the WHO/WFN Neurology Atlas 2nd edition PDF (ISBN 978-92-4-156550-9),
+# downloaded separately: see the data note in README.md
+# Does: parses Annex 1 (pages 67-70 of the PDF) into a country ->
+# WHO region -> World Bank income group crosswalk, repairing the two
+# rows whose country name wraps across a line break
+# Outputs: data/raw/atlas_country_crosswalk.csv
 
 import csv
 import os
@@ -31,7 +31,7 @@ def parse(pdf_path):
                         if country and inc:
                             rows.append([country, reg, inc])
                         break
-    ## one country name wraps onto a second line in the source PDF
+    # one country name wraps onto a second line in the source PDF
     for r in rows:
         if r[0] == "United Kingdom of Great Britain and":
             r[0] = "United Kingdom of Great Britain and Northern Ireland"
@@ -45,7 +45,7 @@ def parse(pdf_path):
 if __name__ == "__main__":
     pdf_path = sys.argv[1] if len(sys.argv) > 1 else "data/raw/neurology_atlas_2017.pdf"
     if not os.path.exists(pdf_path):
-        sys.exit("Atlas PDF not found at %s -- see the data note in README.md" % pdf_path)
+        sys.exit("Atlas PDF not found at %s, see the data note in README.md" % pdf_path)
     rows = parse(pdf_path)
     print("countries parsed from Annex 1:", len(rows))
     os.makedirs("data/raw", exist_ok=True)
@@ -54,5 +54,5 @@ if __name__ == "__main__":
         w.writerow(["country", "who_region", "wb_income_group"])
         w.writerows(rows)
     print("written data/raw/atlas_country_crosswalk_full.csv")
-    print("NOTE: atlas_country_crosswalk.csv adds ISO3 codes for the subset of")
+    print("Note: atlas_country_crosswalk.csv adds ISO3 codes for the subset of")
     print("countries that also appear in the WHO GHO extracts.")
