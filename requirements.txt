@@ -1,48 +1,10 @@
 # QSS 20 final project
-#
 # Install with:
 # pip install -r requirements.txt
-#
-# Tested on Python 3.10.12. Anything from Python 3.9 up should work.
-# Lower bounds are set where a script relies on behavior introduced in that
-# version; they are not pinned exactly so the repo does not rot.
+# Tested on Python 3.10.12.
 
-# ---------------------------------------------------------------------------
-# Core data handling - used by every numbered script
-# ---------------------------------------------------------------------------
-
-# 2.0+ needed for the `min_count` argument used when summing ADL/IADL-style
-# indicator columns, and for the copy-on-write merge semantics in 03_clean_merge
-pandas>=2.0
-
-# 1.24+ for numpy.random.default_rng, used for the reproducible jitter in
-# 06_paired_comparison / 07_regional_and_cadre and the bootstrap in utils.py
-numpy>=1.24
-
-# ---------------------------------------------------------------------------
-# Figures - 04 through 09
-# ---------------------------------------------------------------------------
-
-# 3.6+ for the annotate/connectionstyle arguments used in the curved leader
-# lines, and for set_axisbelow behavior on log-scaled axes in 07
-matplotlib>=3.6
-
-# ---------------------------------------------------------------------------
-# Statistics - 04_analyze.py and 09_robustness.py
-# ---------------------------------------------------------------------------
-
-# ttest_ind(equal_var=False), mannwhitneyu, f_oneway, kruskal, chi2_contingency
-scipy>=1.9
-
-# ---------------------------------------------------------------------------
-# PDF parsing - 01_extract_atlas_pdf.py only
-# ---------------------------------------------------------------------------
-#
-# Only needed to re-parse Annex 1 of the WHO Neurology Atlas. The resulting
-# crosswalk is committed to data/raw/, so scripts 03-09 run without this.
-pdfplumber>=0.10
-
-# ---------------------------------------------------------------------------
-# Standard library only, listed for reference - do NOT pip install these:
-# os, sys, csv, re, json, urllib.request, collections
-# ---------------------------------------------------------------------------
+numpy
+pandas
+matplotlib
+scipy
+pdfplumber
