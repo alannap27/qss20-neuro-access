@@ -1,15 +1,15 @@
-## utils.py
-## Shared helpers imported by every numbered script in this repository.
-## Nothing here reads or writes files; each numbered script owns its own I/O.
+# utils.py
+# Shared helpers imported by every numbered script in this repository.
+# Nothing here reads or writes files; each numbered script owns its own I/O.
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-## ---------------------------------------------------------------
-## House style, so every figure in output/ looks like it belongs to
-## the same project
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# Style, so every figure in output/ looks like it belongs to
+# the same project
+# ---------------------------------------------------------------
 
 PALETTE = {
     "High-income": "#2b6cb0",
@@ -48,20 +48,19 @@ def caption(fig, text, size=7):
     """Attach a self-contained source note under a figure.
 
     Every figure in this project carries its own source, sample size and a
-    plain-language reading of any reference line, so that a reader skimming
-    only the figures can follow the argument.
+    reading of any reference line.
     """
     fig.text(0.01, 0.005, text, fontsize=size, ha="left", va="bottom")
 
 
-## ---------------------------------------------------------------
-## WHO data cleaning
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# WHO data cleaning
+# ---------------------------------------------------------------
 
-## WHO stores non-responses as literal strings inside otherwise numeric fields
+# WHO stores non-responses as literal strings inside otherwise numeric fields
 MISSING_STRINGS = ["Not available", "Not applicable", "No data", "Not reported", ""]
 
-## the service-accessibility question is ordered, not merely categorical
+# the service-accessibility question is ordered, not just categorical
 ACC_SCALE = {
     "Capital city only": 1,
     "Capital and main cities only": 2,
@@ -93,12 +92,12 @@ def bin_income(income_group, n_bins=3):
             "High-income": "High-income"}.get(income_group)
 
 
-## ---------------------------------------------------------------
-## The gap metrics
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# The gap metrics
+# ---------------------------------------------------------------
 
 def share_ratio(burden, capacity):
-    """Burden-to-capacity SHARE RATIO.
+    """Burden-to-capacity share RATIO.
 
     Each country's share of the sample's total burden, divided by its share of
     the sample's total capacity.
