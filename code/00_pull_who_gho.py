@@ -1,11 +1,11 @@
-## 00_pull_who_gho.py
-## Takes in : nothing (hits the public WHO Global Health Observatory OData API)
-## Does     : pulls the three WHO indicators the project relies on and writes
-##            them to data/raw/ in the exact schema the later scripts expect.
-##            No API key is required. Re-run this to refresh the raw files.
-## Outputs  : data/raw/who_gho_neurologists_per100k.csv
-##            data/raw/who_gho_dx_accessibility.csv
-##            data/raw/who_ghe_stroke_dalys_2004.csv
+# 00_pull_who_gho.py
+# Takes in: nothing (the public WHO Global Health Observatory OData API)
+# Does: pulls the three WHO indicators the project relies on and writes
+# them to data/raw/ in the exact schema the later scripts use.
+# No API key is required. Re-run this to refresh the raw files.
+# Outputs: data/raw/who_gho_neurologists_per100k.csv
+##         data/raw/who_gho_dx_accessibility.csv
+##         data/raw/who_ghe_stroke_dalys_2004.csv
 
 import os
 import json
@@ -22,7 +22,7 @@ INDICATORS = {
     ## values: "Capital city only" / "Capital and main cities only" /
     ##         "Capital, main cities and rural areas"
     "GDO_q8x3_1": "who_gho_dx_accessibility.csv",
-    ## age-standardised cerebrovascular disease (stroke) DALYs per 100 000,
+    ## age-standardized cerebrovascular disease (stroke) DALYs per 100 000,
     ## WHO Global Health Estimates. Only the 2004 round is published here.
     "SA_0000001689": "who_ghe_stroke_dalys_2004.csv",
 }
@@ -44,7 +44,7 @@ def main():
         print(f"{code}: {len(rows)} country records -> {fname}")
 
     print()
-    print("NOTE: the committed data/raw/*.csv files were produced by this query")
+    print("Note: the committed data/raw/*.csv files were produced by this query")
     print("and are checked into the repository so that 03_clean_merge.py runs")
     print("without network access. Re-run this script to refresh them.")
 
