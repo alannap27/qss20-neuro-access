@@ -1,12 +1,12 @@
-## 02_parse_dhs_inventory.py
-## Takes in : the DHS Program download manifest (urlslist_*.txt) issued to an
-##            approved DHS account. The manifest is a list of authenticated
-##            download URLs; this script reads the FILENAMES only and does not
-##            download anything.
-## Does     : decodes the DHS filename convention CCTTVVFL.zip into country,
-##            file type and survey phase, and summarises coverage -- in
-##            particular which countries have GE (GPS cluster) files
-## Outputs  : data/processed/dhs_inventory.csv
+# 02_parse_dhs_inventory.py
+# Takes in: the DHS Program download manifest (urlslist_*.txt) issued to an
+# approved DHS account. The manifest is a list of authenticated
+#  download URLs; this script reads the FILENAMES only and does not
+#  download anything.
+# Does: decodes the DHS filename convention CCTTVVFL.zip into country,
+# file type and survey phase, and summarises coverage: in
+# particular which countries have GE (GPS cluster) files
+# Outputs: data/processed/dhs_inventory.csv
 
 import csv
 import os
