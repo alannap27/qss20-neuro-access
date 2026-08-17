@@ -31,24 +31,24 @@ states how large that confounding would have to be to overturn the main result.
 
 ## Two levels of evidence
 
-The project works at two scales, and every substantive claim is checked at both.
+The project works at two scales.
 
-**Aggregate.** The WHO/WFN Neurology Atlas reports medians by income group and
-WHO region across **114 responding countries**. Six times the country-level
-sample, so it establishes the gradient securely — but it cannot identify
+**Aggregate:** The WHO/WFN Neurology Atlas reports medians by income group and
+WHO region across 114 responding countries. Six times the country-level
+sample, so it establishes the gradient securely, but it cannot identify
 individual countries or be linked to burden.
 
-**Country level.** The WHO Global Dementia Observatory reports country-by-country
+**Country level:** The WHO Global Dementia Observatory reports country-by-country
 values, which is what makes the burden-to-capacity ratio and the Gini possible,
-but only **19 countries** report neurologist density.
+but only 19 countries report neurologist density.
 
-Figures 6 and 7 set the two instruments side by side. They disagree on level, for
-a documented reason — the Atlas counts neurologists, neurosurgeons and child
-neurologists, the GDO counts neurologists only — and agree on direction and
+Figures 6 and 7 compare the two and show that they disagree on level (because 
+the Atlas counts neurologists, neurosurgeons and child neurologists, 
+the GDO counts neurologists only) and agree on direction and
 steepness. Figure 8 shows the regional medians converging: the GDO median for the
 European Region is 6.01 per 100,000 against the Atlas adult-neurologist median of
 6.60, and for South-East Asia 0.08 against 0.10. That agreement is the main
-defence against the small-*n* objection the country-level work would otherwise
+defense against the small-*n* objection the country-level work would otherwise
 face.
 
 ---
@@ -57,9 +57,9 @@ face.
 
 ### RQ1. Is neurological workforce capacity aligned with neurological disease burden?
 
-No, and the misalignment is large. On the burden-to-capacity **share ratio**
+No, and the misalignment is large. On the burden-to-capacity share ratio
 (defined below), the median high-income country sits at **0.38** and the median
-low- or middle-income country at **13.1** — a 34-fold difference in how thinly
+low- or middle-income country at **13.1**, which is a 34 fold difference in how thinly
 the same workforce is spread. Myanmar (69.7), Bangladesh (49.1) and Togo (43.9)
 are the extremes; Switzerland (0.07) and the Netherlands (0.25) the other end.
 Eswatini and Fiji report **zero** neurologists and cannot be placed on the scale
@@ -70,19 +70,19 @@ at all, while carrying stroke DALY rates of 994 and 1,536 per 100,000.
 ### RQ2. How unequally is that capacity distributed?
 
 The Gini coefficient of neurologist density across the 19 reporting countries is
-**0.61**, with a 95% bootstrap interval of **[0.43, 0.73]** — high inequality,
+**0.61**, with a 95% bootstrap interval of **[0.43, 0.73]**, thus showing high inequality,
 imprecisely estimated. The lower half of countries holds about **6%** of the
 sampled workforce. Inequality is far greater between income groups than within
 them: Gini 0.27 within high-income countries, 0.49 within low- and middle-income
-countries. Focal contrast: Switzerland 13.10 per 100,000 against Myanmar 0.07, a
-**187-fold** difference. Dropping any single country moves the Gini by at most
+countries. Switzerland 13.10 per 100,000 against Myanmar 0.07, which is a
+187 fold difference. Dropping any single country moves the Gini by at most
 0.06, so no one reporter carries the result.
 
 → `output/fig2_lorenz_gini.png`, `output/fig11_robustness.png`
 
 ### RQ3. Does the gap differ systematically between country types?
 
-Yes. Country-level regressions on 19 to 35 observations would be underpowered, so
+Yes, country-level regressions on 19 to 35 observations would be underpowered, so
 countries are binned and compared directly.
 
 | Comparison | Test | Result |
