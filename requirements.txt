@@ -1,10 +1,10 @@
-# QSS 20 final project - Python dependencies
+# QSS 20 final project
 #
 # Install with:
-#     pip install -r requirements.txt
+# pip install -r requirements.txt
 #
 # Tested on Python 3.10.12. Anything from Python 3.9 up should work.
-# Lower bounds are set where a script relies on behaviour introduced in that
+# Lower bounds are set where a script relies on behavior introduced in that
 # version; they are not pinned exactly so the repo does not rot.
 
 # ---------------------------------------------------------------------------
@@ -24,7 +24,7 @@ numpy>=1.24
 # ---------------------------------------------------------------------------
 
 # 3.6+ for the annotate/connectionstyle arguments used in the curved leader
-# lines, and for set_axisbelow behaviour on log-scaled axes in 07
+# lines, and for set_axisbelow behavior on log-scaled axes in 07
 matplotlib>=3.6
 
 # ---------------------------------------------------------------------------
@@ -44,5 +44,5 @@ pdfplumber>=0.10
 
 # ---------------------------------------------------------------------------
 # Standard library only, listed for reference - do NOT pip install these:
-#   os, sys, csv, re, json, urllib.request, collections
+# os, sys, csv, re, json, urllib.request, collections
 # ---------------------------------------------------------------------------
