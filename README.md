@@ -95,13 +95,13 @@ countries are binned and compared directly.
 | Service reach × income bin | Chi-square | χ² = 11.81, df = 4, **p = 0.0188** |
 
 Dementia diagnostic services reach rural areas in **77%** of high-income
-countries and in **none** of the four low or lower-middle income countries
+countries and in **none** of the four low- or lower-middle-income countries
 sampled. The chi-square has six of nine cells with expected counts below 5, which
 is why the rank-based and permutation tests are reported alongside it.
 
 → `output/fig3_service_reach_by_income.png`, `output/fig7_paired_rural_access.png`
 
-### Supporting finding: the gradient steepens with subspecialisation
+### Supporting finding: the gradient steepens with subspecialization
 
 | Cadre | Low-income | High-income | Ratio |
 |---|---|---|---|
@@ -117,7 +117,7 @@ The rarer the specialism, the steeper the income gradient.
 
 ## The gap metric, defined
 
-The **burden-to-capacity share ratio** for a country is
+The burden-to-capacity share ratio for a country is
 
 ```
 (that country's share of the sample's total stroke DALY rate)
@@ -125,15 +125,15 @@ The **burden-to-capacity share ratio** for a country is
 (that country's share of the sample's total neurologist density)
 ```
 
-Read it like this:
+It can be read as follows:
 
-- **1.0** — the country holds exactly as large a share of the sample's stroke
-  burden as it holds of the sample's neurological workforce. Burden and capacity
+- **1.0**: the country holds exactly as large a share of the sample's stroke
+  burden as it holds of the sample's neurological workforce; burden and capacity
   are matched.
-- **1.2** — it carries 20% more of the burden than its share of the workforce.
-- **13.1** — it carries thirteen times as large a share of the burden as of the
+- **1.2**: it carries 20% more of the burden than its share of the workforce.
+- **13.1**: it carries thirteen times as large a share of the burden as of the
   workforce; the same workforce stretched over thirteen times the need.
-- **below 1.0** — it holds more of the workforce than of the burden.
+- **below 1.0**: it holds more of the workforce than of the burden.
 
 The ratio is scale-free, so it does not depend on the units of either input, and
 is directly comparable across countries. It is undefined where capacity is zero;
@@ -144,17 +144,16 @@ those countries are reported separately rather than dropped. Implemented in
 
 ## Bounding the confounder
 
-Naming a confounder in a limitations section is not the same as accounting for
-it. National income drives both capacity and measured burden, so the question is
-how much of the observed gap would have to be spurious for the conclusion to
+National income drives both capacity and measured burden, so the question is
+how much of the observed gap would have to be inaccurate for the conclusion to
 reverse.
 
 The median share ratio is 0.38 in high-income countries and 13.12 in low- and
-middle-income countries — a factor of **34.3**. For those two medians to level,
+middle-income countries, which is a factor of **34.3**. For those two medians to level,
 burden in low- and middle-income countries would have to be **overstated by a
 factor of 34**, or their capacity **understated by a factor of 34**. Measurement
 error of that magnitude is not plausible in either direction: under-diagnosis in
-low-capacity settings would push measured burden *down*, not up, which widens the
+low-capacity settings would push measured burden down, not up, which widens the
 true gap rather than narrowing it.
 
 → `output/table7_robustness.csv`
