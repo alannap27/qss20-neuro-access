@@ -164,41 +164,39 @@ true gap rather than narrowing it.
 
 | # | File | Shows | n |
 |---|---|---|---|
-| 1 | `fig1_alignment_ratio.png` | burden-to-capacity share ratio per country, log scale | 17 |
+| 1 | `fig1_alignment_ratio.png` | Burden-to-capacity share ratio per country, log scale | 17 |
 | 2 | `fig2_lorenz_gini.png` | Lorenz curve and Gini of neurologist density | 19 |
-| 3 | `fig3_service_reach_by_income.png` | where dementia diagnostic services reach, by income bin | 35 |
+| 3 | `fig3_service_reach_by_income.png` | Where dementia diagnostic services reach, by income bin | 35 |
 | 4 | `fig4_atlas_workforce_by_income.png` | Atlas median workforce density by income group | 114 |
 | 5 | `fig5_atlas_where_neurologists_practise.png` | Atlas capital / urban / rural practice shares | 114 |
-| 6 | `fig6_paired_workforce_gradient.png` | **paired** — Atlas medians beside GDO country values | 114 / 15 |
-| 7 | `fig7_paired_rural_access.png` | **paired** — Atlas rural practice beside GDO service reach | 114 / 35 |
-| 8 | `fig8_regional_gradient.png` | workforce by WHO region, Atlas bars with GDO countries overlaid | 114 / 19 |
-| 9 | `fig9_cadre_gradient.png` | gradient by cadre on a log axis | 93–114 |
+| 6 | `fig6_paired_workforce_gradient.png` | paired: Atlas medians beside GDO country values | 114 / 15 |
+| 7 | `fig7_paired_rural_access.png` | paired: Atlas rural practice beside GDO service reach | 114 / 35 |
+| 8 | `fig8_regional_gradient.png` | Workforce by WHO region, Atlas bars with GDO countries overlaid | 114 / 19 |
+| 9 | `fig9_cadre_gradient.png` | Gradient by cadre on a log axis | 93–114 |
 | 10 | `fig10_dhs_coverage.png` | DHS holdings, GPS availability, and the binding constraint | 106 |
-| 11 | `fig11_robustness.png` | bootstrap, leave-one-out, and permutation checks | 19 |
+| 11 | `fig11_robustness.png` | Bootstrap, leave-one-out, and permutation checks | 19 |
 
-Every figure carries its own source note, sample size, and a plain-language
-reading of any reference line, so a reader skimming only the figures can follow
-the argument.
+Every figure carries its own source note, sample size, and a reading of any reference line.
 
 ## Table index
 
 | # | File | Contents |
 |---|---|---|
-| 1 | `table1_analysis_sample.csv` | what the analysis sample contains, source by source |
-| 2 | `table2_hypothesis_tests.csv` | all RQ3 test statistics with detail |
-| 3 | `table3_atlas_gradients.csv` | per-cadre absolute gap and high-to-low ratio |
-| 4 | `table4_paired_instruments.csv` | what each instrument contributes and where it fails |
+| 1 | `table1_analysis_sample.csv` | What the analysis sample contains, source by source |
+| 2 | `table2_hypothesis_tests.csv` | All RQ3 test statistics with detail |
+| 3 | `table3_atlas_gradients.csv` | Per-cadre absolute gap and high-to-low ratio |
+| 4 | `table4_paired_instruments.csv` | What each instrument contributes and where it fails |
 | 5 | `table5_regional_comparison.csv` | Atlas vs GDO by WHO region |
 | 6 | `table6_dhs_coverage.csv` | DHS coverage metrics |
-| 7 | `table7_robustness.csv` | bootstrap intervals, leave-one-out swing, confounding bound |
+| 7 | `table7_robustness.csv` | Bootstrap intervals, leave-one-out swing, confounding bound |
 
 ---
 
 ## Scripts
 
-`code/utils.py` holds every shared function — the house plotting style, the WHO
+`code/utils.py` holds every shared function: the house plotting style, the WHO
 placeholder-string cleaner, the income binner, and the three metrics
-(`share_ratio`, `gini`, `bootstrap_ci`). Numbered scripts import from it and own
+(`share_ratio`, `gini`, `bootstrap_ci`). Numbered scripts import from it and handle
 their own file I/O.
 
 | Script | Takes in | Does | Outputs |
@@ -218,19 +216,19 @@ their own file I/O.
 ### Repository layout
 
 ```
-code/                 numbered scripts plus the shared utils.py
-data/raw/             inputs as pulled, unmodified
-data/processed/       merged analysis file and DHS inventory
+code/                 Numbered scripts plus the shared utils.py
+data/raw/             Inputs as pulled, unmodified
+data/processed/       Merged analysis file and DHS inventory
 output/               11 figures, 7 tables, run logs
-docs/milestone1/      the Milestone 1 writeup (.tex and .pdf) and the
+docs/milestone1/      The Milestone 1 writeup (.tex and .pdf) and the
                       original standalone script that produced its two
-                      figures, kept for provenance
-run_all.sh            rebuilds every figure and table offline
+                      figures, kept for origin
+run_all.sh            Rebuilds every figure and table offline
 ```
 
 `docs/milestone1/milestone1_analysis_ORIGINAL.py` is superseded by
 `code/05_atlas_descriptives.py`, which produces the same two figures with
-response counts, ratio annotations and full source captions added. It is kept so
+response counts, ratio annotations, and full source captions added. It is kept so
 the Milestone 1 PDF remains reproducible as submitted.
 
 ### Running it
@@ -252,7 +250,7 @@ python code/08_dhs_coverage.py
 python code/09_robustness.py
 ```
 
-Scripts `03`–`09` run **offline** from the committed raw files. `00` and `01`
+Scripts `03`–`09` run offline from the committed raw files. `00` and `01`
 only need re-running to refresh inputs, and `02` needs your own DHS manifest.
 
 ---
@@ -266,7 +264,7 @@ here is restricted or individual-level.
 |---|---|---|---|
 | WHO Global Dementia Observatory `GDO_q6x1_2` | neurologists per 100,000 | 21 records, **19 usable** | 2017 |
 | WHO Global Dementia Observatory `GDO_q8x3_1` | where dementia diagnostic services reach | 61 records, **47 usable** | 2017 |
-| WHO Global Health Estimates `SA_0000001689` | age-standardised stroke DALYs per 100,000 | 62 countries | **2004** |
+| WHO Global Health Estimates `SA_0000001689` | age-standardised stroke DALYs per 100,000 | 62 countries | 2004 |
 | WHO/WFN Neurology Atlas, Annex 1 | WHO region and World Bank income group | 133 countries; 45 matched to ISO3 | 2017 |
 | WHO/WFN Neurology Atlas, Tables 2–3, Figs 11–12, 15–16 | median density and practice location by income group and region | 114 responding countries | 2017 |
 | DHS Program manifest | survey and GPS-file coverage inventory | 106 countries, 443 surveys, **62 with GPS** | various |
@@ -283,25 +281,25 @@ included, and it contains no survey responses.
 
 ## Known limitations
 
-1. **Temporal mismatch.** Capacity is 2017, burden is 2004 — the only round of
-   the WHO stroke DALY series available through this API. Thirteen years is long
-   enough for both to move. Country *rankings* are likely more stable than
+1. **Temporal mismatch:** Capacity is 2017, burden is 2004: the only round of
+   the WHO stroke DALY series available through this API, but thirteen years is long
+   enough for both to move. Country rankings are likely more stable than
    levels, but this is the weakest joint in the analysis and the reason RQ1 is
    framed as describing a gap rather than estimating one. Replacing this with an
    IHME GBD extract is the single highest-value next step; `03_clean_merge.py`
    needs only a burden file with an `iso3` column.
-2. **Small, self-selected samples.** 19 countries report neurologist density; 35
+2. **Small, self-selected samples:** 19 countries report neurologist density; 35
    have both service reach and an income group. Countries answering the WHO
    questionnaire plausibly have stronger health information systems, biasing the
-   sample toward better-resourced countries and *understating* the true gap.
-3. **Stroke stands in for neurological burden.** Cerebrovascular disease is one
+   sample toward better-resourced countries and understating the true gap.
+3. **Stroke stands in for neurological burden:** Cerebrovascular disease is one
    neurological cause among many.
-4. **Small cell counts.** Six of nine cells in the RQ3 contingency table have
+4. **Small cell counts:** Six of nine cells in the RQ3 contingency table have
    expected counts below 5, so the chi-square is indicative; rank-based and
    permutation tests are reported alongside.
-5. **Self-reported and unaudited.** Both WHO instruments are questionnaires
+5. **Self-reported and unaudited:** Both WHO instruments are questionnaires
    completed by ministry focal points, with no independent verification and no
    full-time-equivalent adjustment.
-6. **Coverage gap in the crosswalk.** 17 of the 62 WHO-extract countries are
+6. **Coverage gap in the crosswalk:** 17 of the 62 WHO-extracted countries are
    absent from the Atlas 133 and therefore have no income group; they appear in
    figures as "not classified" rather than being dropped.
