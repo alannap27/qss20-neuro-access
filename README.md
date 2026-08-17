@@ -1,14 +1,14 @@
 # Neurological care capacity vs. neurological disease burden
 
-QSS 20 final project, Milestone 2. Alanna Polyak, Dartmouth College.
+QSS 20 final project, Alanna Polyak, Dartmouth College.
 
 Does the world's neurological workforce sit where the neurological disease
 burden is? This repository assembles four public sources to measure that gap,
-characterise how unequally capacity is distributed, and test whether the pattern
+characterize how unequally capacity is distributed, and test whether the pattern
 differs systematically between country types.
 
-The analysis is **descriptive throughout**. National income drives both workforce
-capacity and *measured* burden, and measured burden itself depends on the
+The analysis is descriptive throughout; national income drives both workforce
+capacity and measured burden, and measured burden itself depends on the
 diagnostic capacity that is the exposure of interest. No causal effect is
 estimated or implied. Section [Bounding the confounder](#bounding-the-confounder)
 states how large that confounding would have to be to overturn the main result.
