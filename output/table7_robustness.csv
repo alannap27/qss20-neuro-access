@@ -1,0 +1,5 @@
+quantity,estimate,uncertainty,note
+Gini of neurologist density,0.607,"[0.427, 0.725]","5000-draw percentile bootstrap, n = 19"
+"Gini, leave-one-out range",0.571 to 0.631,swing 0.060,dropping CHE lowers it most; dropping CHL raises it most
+High- vs low/middle-income density difference,5.62 vs 0.51 per 100k,permutation p = 0.0002,"20 000 permutations; Welch p = 0.0031, Mann-Whitney p = 0.0003"
+Confounding needed to erase the RQ1 gap,median ratio 13.12 vs 0.38,factor 34.3,"burden would have to be overstated, or capacity understated, this many times over in low/middle-income countries"

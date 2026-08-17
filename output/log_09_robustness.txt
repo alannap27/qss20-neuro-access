@@ -1,0 +1,24 @@
+Gini = 0.607, 95% bootstrap CI [0.427, 0.725], n = 19
+
+leave-one-out Gini, most influential countries:
+dropped  statistic
+    CHE   0.571090
+    SWZ   0.585453
+    FJI   0.585453
+    SWE   0.630804
+    JPN   0.631313
+    CHL   0.631494
+
+high vs low/middle: Welch p = 0.0031, Mann-Whitney p = 0.0003, permutation p = 0.0002
+
+median share ratio: high-income 0.38, low/middle 13.12 -> gap factor 34.3
+to erase the gap, low/middle burden would have to be overstated (or their
+capacity understated) by a factor of 34.3
+
+                                     quantity                   estimate            uncertainty                                                                                                             note
+                  Gini of neurologist density                      0.607         [0.427, 0.725]                                                                           5000-draw percentile bootstrap, n = 19
+                    Gini, leave-one-out range             0.571 to 0.631            swing 0.060                                                         dropping CHE lowers it most; dropping CHL raises it most
+High- vs low/middle-income density difference      5.62 vs 0.51 per 100k permutation p = 0.0002                                                   20 000 permutations; Welch p = 0.0031, Mann-Whitney p = 0.0003
+      Confounding needed to erase the RQ1 gap median ratio 13.12 vs 0.38            factor 34.3 burden would have to be overstated, or capacity understated, this many times over in low/middle-income countries
+
+figure 11 and table 7 written to output/

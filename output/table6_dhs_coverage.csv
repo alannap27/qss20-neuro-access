@@ -1,0 +1,10 @@
+metric,value
+Datasets in manifest,3018.0
+Distinct countries,106.0
+Distinct surveys,443.0
+Countries with GPS (GE) files,62.0
+Countries with 1 survey only,19.0
+Countries with 5+ surveys,36.0
+Median surveys per country,2.5
+WHO countries with neurologist density,19.0
+WHO countries with service-reach level,47.0

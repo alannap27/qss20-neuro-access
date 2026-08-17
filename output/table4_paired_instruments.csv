@@ -1,0 +1,5 @@
+construct,instrument,n_countries,unit,finding,limitation
+Workforce gradient,WHO Neurology Atlas (aggregate),114,median per income group,0.1 -> 7.1 per 100k (71x),cannot identify countries; not linkable to burden
+Workforce gradient,WHO GDO (country level),15,one value per country,median 0.09 -> 4.58 per 100k (51x),"small sample; neurologists only, no neurosurgeons"
+Rural access,WHO Neurology Atlas (aggregate),114,% of countries reporting rural practice,45% -> 0% across income groups,"binary presence, not intensity"
+Rural access,WHO GDO (country level),35,ordered service-reach level,77% -> 0% of countries reach rural areas,"dementia services specifically, not all neurology"

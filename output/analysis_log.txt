@@ -1,0 +1,58 @@
+                                         measure  n
+                              Countries in panel 52
+        With neurologist density (WHO GDO, 2017) 19
+        With service-reach level (WHO GDO, 2017) 47
+           With stroke DALY rate (WHO GHE, 2004) 52
+  With World Bank income group (WHO Atlas, 2017) 39
+           With capacity AND burden (RQ1 sample) 19
+With service reach AND income group (RQ3 sample) 35
+
+=== RQ1: burden-to-capacity share ratio ===
+countries on the ratio scale: 17
+countries reporting ZERO neurologists (off-scale): ['FJI', 'SWZ'] - burden per 100k: [1536, 994]
+
+iso3     wb_income_group  neurologists_per100k  stroke_dalys_per100k_agestd_2004  alignment_ratio
+ CHE         High-income                 13.10                               184         0.071863
+ NLD         High-income                  6.01                               291         0.247729
+ FRA         High-income                  3.80                               242         0.325829
+ SWE         High-income                  4.20                               281         0.342307
+ CHL         High-income                  4.79                               396         0.422978
+ JPN         High-income                  4.38                               425         0.496447
+ HUN         High-income                  6.60                               702         0.544191
+ AUS         High-income                  2.10                               228         0.555487
+ QAT                 NaN                  1.78                               254         0.730082
+ TUN Upper-middle income                  1.58                               411         1.330892
+ CRI Upper-middle income                  0.61                               247         2.071693
+ DOM Upper-middle income                  0.69                              1091         8.089727
+ JOR Upper-middle income                  0.41                              1051        13.115265
+ MUS                 NaN                  0.23                              1065        23.690814
+ TGO          Low-income                  0.14                              1201        43.890769
+ BGD Lower-middle income                  0.09                               864        49.116731
+ MMR Lower-middle income                  0.07                               953        69.655126
+
+median ratio, high-income: 0.38
+median ratio, low/middle-income: 13.12
+
+=== RQ2: inequality in capacity ===
+Gini of neurologist density across 19 countries: 0.607
+  within High-income    (n=8): Gini = 0.269
+  within Low / middle   (n=7): Gini = 0.493
+  focal contrast: CHE 13.10 vs MMR 0.07 per 100k = 187-fold
+
+=== RQ3: binned comparisons ===
+service-reach sample: 35 countries
+
+                    Capital only  Capital + main cities  Reaches rural areas
+income_bin3                                                                 
+High-income                    1                      4                   17
+Low / lower-middle             1                      3                    0
+Upper-middle                   0                      5                    4
+
+                                    comparison           test            statistic    p_value                                                                                            detail
+Neurologist density, high-income vs low/middle   Welch t-test             t = 4.29 p = 0.0031                                                                    n = 8 vs 7; means 5.62 vs 0.51
+Neurologist density, high-income vs low/middle Mann-Whitney U             U = 56.0 p = 0.0003                                                                              medians 4.58 vs 0.41
+        Service reach across three income bins  One-way ANOVA             F = 5.74 p = 0.0074 High-income: mean 2.73 (n=22); Low / lower-middle: mean 1.75 (n=4); Upper-middle: mean 2.44 (n=9)
+        Service reach across three income bins Kruskal-Wallis             H = 9.44 p = 0.0089                                                                     rank-based check on the ANOVA
+     Service reach by income bin (contingency)     Chi-square chi2 = 11.81, df = 4 p = 0.0188                                                           expected counts below 5 in 6 of 9 cells
+
+figures and tables written to output/

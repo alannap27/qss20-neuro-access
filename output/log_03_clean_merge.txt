@@ -1,0 +1,29 @@
+neurologist records pulled: 21
+  with a usable numeric value: 19
+  dropped as Not available/Not applicable: 2
+
+accessibility records pulled: 61
+  with a usable ordered value: 47
+  dropped as Not available/Not applicable: 14
+
+burden records: 62  crosswalk records: 45
+
+rows after outer join of capacity and accessibility: 52
+rows after left join of burden: 52 (was 52 )
+  matched a burden value: 52
+rows after left join of crosswalk: 52 (was 52 )
+  matched an income group: 39
+  no income group (country absent from the WHO Atlas 133): 13
+
+=== country_panel.csv ===
+rows: 52
+with capacity (neurologist density): 19
+with distribution (accessibility): 47
+with both capacity and burden: 19
+
+income_bin3
+High-income           22
+NaN                   13
+Upper-middle          12
+Low / lower-middle     5
+Name: count, dtype: int64
