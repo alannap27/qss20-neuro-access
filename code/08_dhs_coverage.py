@@ -1,14 +1,14 @@
-## 08_dhs_coverage.py
-## Takes in : data/processed/dhs_inventory.csv  (built by 02_parse_dhs_inventory.py)
-##            data/processed/country_panel.csv
-## Does     : characterises what the approved DHS holdings can and cannot support.
-##            DHS is the intended source of the within-country spatial component
-##            of this project -- GPS cluster coordinates give distance to care --
-##            so this script establishes which countries have GPS files, how the
-##            survey programme is distributed across WHO regions, and where DHS
-##            coverage overlaps the countries for which WHO capacity data exists.
-## Outputs  : output/fig10_dhs_coverage.png
-##            output/table6_dhs_coverage.csv
+# 08_dhs_coverage.py
+# Takes in: data/processed/dhs_inventory.csv  (built by 02_parse_dhs_inventory.py)
+#           data/processed/country_panel.csv
+# Does: characterizes what the approved DHS holdings can and cannot support.
+# DHS is the intended source of the within-country spatial component
+# of this project, GPS cluster coordinates give distance to care, 
+# so this script establishes which countries have GPS files, how the
+# survey program is distributed across WHO regions, and where DHS
+# coverage overlaps the countries for which WHO capacity data exists.
+# Outputs: output/fig10_dhs_coverage.png
+#          output/table6_dhs_coverage.csv
 
 import os
 import sys
@@ -53,13 +53,13 @@ per_country = dhs.groupby("dhs_cc").agg(
 ).reset_index()
 per_country["has_gps"] = per_country["dhs_cc"].isin(gps_countries)
 
-## ---------------------------------------------------------------
-## Figure 10 -- three panels describing the DHS holdings
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# Figure 10: three panels describing the DHS holdings
+# ---------------------------------------------------------------
 
 fig, axes = plt.subplots(1, 3, figsize=(16, 5.6))
 
-## panel A: dataset counts by file type
+# panel A: dataset counts by file type
 ax = axes[0]
 counts = dhs["file_type"].value_counts()
 counts = counts[counts >= 10].sort_values()
@@ -75,7 +75,7 @@ ax.set_title("A. What the manifest contains\n%d datasets across %d surveys"
 ax.tick_params(axis="y", labelsize=8)
 style_axis(ax, axis="x")
 
-## panel B: how many surveys each country has, split by GPS availability
+# panel B: how many surveys each country has, split by GPS availability
 ax = axes[1]
 bins = np.arange(0.5, per_country["n_surveys"].max() + 1.5, 1)
 ax.hist([per_country.loc[per_country["has_gps"], "n_surveys"],
@@ -89,7 +89,7 @@ ax.set_title("B. Repeat coverage by country\n%d of %d countries have GPS cluster
              % (len(gps_countries), n_countries), fontsize=10.5)
 style_axis(ax)
 
-## panel C: overlap between DHS coverage and WHO capacity data
+# panel C: overlap between DHS coverage and WHO capacity data
 ax = axes[2]
 who_cap = set(panel.loc[panel[CAP].notna(), "iso3"])
 who_acc = set(panel.loc[panel["accessibility_level"].notna(), "iso3"])
@@ -122,9 +122,9 @@ plt.tight_layout(rect=[0, 0.065, 1, 0.965])
 plt.savefig("output/fig10_dhs_coverage.png", dpi=200)
 plt.close()
 
-## ---------------------------------------------------------------
-## Table 6
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# Table 6
+# ---------------------------------------------------------------
 
 t6 = pd.DataFrame({
     "metric": ["Datasets in manifest", "Distinct countries", "Distinct surveys",
