@@ -1,16 +1,16 @@
-## 04_analyze.py
-## Takes in : data/processed/country_panel.csv
-## Does     : answers the three research questions -- (RQ1) how far capacity is
-##            aligned with burden, measured as a share ratio; (RQ2) how unequally
-##            capacity is distributed across and within countries, measured with a
-##            Gini coefficient and the service-reach gradient; (RQ3) whether the
-##            gap differs between binned country types, tested with Welch t-tests,
-##            one-way ANOVA and a chi-square rather than a country-level regression
-## Outputs  : output/fig1_alignment_ratio.png
-##            output/fig2_lorenz_gini.png
-##            output/fig3_service_reach_by_income.png
-##            output/table1_analysis_sample.csv
-##            output/table2_hypothesis_tests.csv
+# 04_analyze.py
+# Takes in: data/processed/country_panel.csv
+# Does: answers the three research questions: (RQ1) how far capacity is
+# aligned with burden, measured as a share ratio; (RQ2) how unequally
+# capacity is distributed across and within countries, measured with a
+# Gini coefficient and the service-reach gradient; (RQ3) whether the
+# gap differs between binned country types, tested with Welch t-tests,
+# one-way ANOVA and a chi-square rather than a country-level regression
+# Outputs: output/fig1_alignment_ratio.png
+#          output/fig2_lorenz_gini.png
+#          output/fig3_service_reach_by_income.png
+#          output/table1_analysis_sample.csv
+#          output/table2_hypothesis_tests.csv
 
 import os
 import numpy as np
@@ -26,9 +26,9 @@ df = pd.read_csv("data/processed/country_panel.csv")
 BURDEN = "stroke_dalys_per100k_agestd_2004"
 CAP = "neurologists_per100k"
 
-## ---------------------------------------------------------------
-## Table 1: what the analysis sample actually contains
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# Table 1: what the analysis sample contains
+# ---------------------------------------------------------------
 
 t1 = pd.DataFrame({
     "measure": ["Countries in panel",
@@ -46,22 +46,22 @@ t1 = pd.DataFrame({
 t1.to_csv("output/table1_analysis_sample.csv", index=False)
 print(t1.to_string(index=False))
 
-## ===============================================================
-## RQ1. Is neurological workforce capacity aligned with burden?
-## ===============================================================
-## Metric: the burden-to-capacity SHARE RATIO.
-##   share of sample burden held by a country, divided by
-##   share of sample neurologists held by that country.
-## A ratio of 1.0 means the country carries exactly as large a share of the
-## sample's stroke burden as it holds of the sample's neurological workforce.
-## A ratio of 2.0 means it carries twice as large a share of the burden as it
-## holds of the workforce -- i.e. its workforce is spread half as thinly as
-## an evenly-matched country's would be.
+# ===============================================================
+# RQ1. Is neurological workforce capacity aligned with burden?
+# ===============================================================
+# Metric: the burden-to-capacity share ratio.
+# share of sample burden held by a country, divided by
+# share of sample neurologists held by that country.
+# A ratio of 1.0 means the country carries exactly as large a share of the
+# sample's stroke burden as it holds of the sample's neurological workforce.
+# A ratio of 2.0 means it carries twice as large a share of the burden as it
+# holds of the workforce: i.e. its workforce is spread half as thinly as
+# an evenly-matched country's would be.
 
 rq1 = df[df[CAP].notna() & df[BURDEN].notna()].copy()
 
-## countries reporting zero neurologists cannot be placed on a ratio scale at
-## all; they are reported separately rather than silently dropped or set to inf
+# countries reporting zero neurologists cannot be placed on a ratio scale at
+# all; they are reported separately rather than silently dropped or set to inf
 zero_cap = rq1[rq1[CAP] == 0]
 rq1 = rq1[rq1[CAP] > 0].copy()
 
@@ -84,10 +84,10 @@ print("median ratio, high-income:",
 print("median ratio, low/middle-income:",
       round(rq1.loc[rq1["income_bin2"] == "Low / middle", "alignment_ratio"].median(), 2))
 
-## Figure 1 -- annotated so it stands alone
-## The ratio spans three orders of magnitude (0.07 to 70), so it is drawn on a
-## log scale: there the reference value of 1.0 sits mid-axis, and "twice as much
-## burden as workforce" is the same visual distance as "half as much".
+# Figure 1, annotated
+# The ratio spans three orders of magnitude (0.07 to 70), so it is drawn on a
+# log scale: there the reference value of 1.0 sits mid-axis, and "twice as much
+# burden as workforce" is the same visual distance as "half as much".
 LABEL = {"High-income": "High-income", "Low / middle": "Low / middle-income"}
 rq1["grp"] = rq1["income_bin2"].map(LABEL).fillna("Not classified")
 PALETTE = {"High-income": "#2b6cb0", "Low / middle-income": "#c05621",
@@ -105,8 +105,8 @@ ax.xaxis.grid(True, which="major", color="#dddddd", linewidth=0.8, zorder=0)
 ax.set_axisbelow(True)
 ax.axvline(1.0, color="black", linestyle="--", linewidth=1.3, zorder=4)
 
-## labels sit outside the bar tip, but bars just below parity would run their
-## label straight through the dashed 1.0 line, so those are set inside instead
+# labels sit outside the bar tip, but bars just below parity would run their
+# label straight through the dashed 1.0 line, so those are set inside instead
 for y, v in enumerate(rq1["alignment_ratio"]):
     txt = ("%.2f" % v) if v < 1 else ("%.1f" % v)
     if 0.45 < v < 1.0:
@@ -134,18 +134,18 @@ ax.legend(handles, ["High-income", "Low / middle-income", "Income group not in W
           fontsize=8, loc="lower right", framealpha=0.95)
 plt.figtext(0.01, 0.005,
             "Ratio above 1.0 means the country holds a larger share of the sample's stroke burden than of its neurologists; below 1.0 the reverse. "
-            "Capacity is WHO Global\nDementia Observatory neurologist density per 100 000 (2017); burden is WHO Global Health Estimates age-standardised stroke DALYs per 100 000 (2004).\n"
-            "Eswatini and Fiji report zero neurologists and cannot be placed on a ratio scale; their stroke DALY rates are 994 and 1 536 per 100 000.",
+            "Capacity is WHO Global\nDementia Observatory neurologist density per 100 000 (2017); burden is WHO Global Health Estimates age-standardized stroke DALYs per 100 000 (2004).\n"
+            "Eswatini and Fiji report zero neurologists and cannot be placed on a ratio scale; their stroke DALY rates are 994 and 1,536 per 100,000.",
             fontsize=7, ha="left")
 plt.tight_layout(rect=[0, 0.075, 1, 1])
 plt.savefig("output/fig1_alignment_ratio.png", dpi=200)
 plt.close()
 
-## ===============================================================
-## RQ2. How unequally is capacity distributed?
-## ===============================================================
-## Gini of neurologist density across countries. 0 = every country has the
-## same density; 1 = one country holds the entire workforce.
+# ===============================================================
+# RQ2. How unequally is capacity distributed?
+# ===============================================================
+# Gini of neurologist density across countries. 0 = every country has the
+# same density; 1 = one country holds the entire workforce.
 
 def gini(x):
     x = np.sort(np.asarray(x, dtype=float))
@@ -208,9 +208,9 @@ plt.tight_layout(rect=[0, 0.05, 1, 1])
 plt.savefig("output/fig2_lorenz_gini.png", dpi=200)
 plt.close()
 
-## ===============================================================
+# ===============================================================
 ## RQ3. Does the gap differ systematically between country types?
-## ===============================================================
+# ===============================================================
 
 rq3 = df[df["accessibility_level"].notna() & df["wb_income_group"].notna()].copy()
 
@@ -224,7 +224,7 @@ print(ct)
 
 tests = []
 
-## (a) Welch t-test on capacity, high-income vs low/middle
+# (a) Welch t-test on capacity, high-income vs low/middle
 a = df.loc[df[CAP].notna() & (df["income_bin2"] == "High-income"), CAP]
 b = df.loc[df[CAP].notna() & (df["income_bin2"] == "Low / middle"), CAP]
 if len(a) >= 2 and len(b) >= 2:
@@ -237,7 +237,7 @@ if len(a) >= 2 and len(b) >= 2:
                   "Mann-Whitney U", f"U = {u:.1f}", f"p = {pu:.4f}",
                   f"medians {a.median():.2f} vs {b.median():.2f}"])
 
-## (b) one-way ANOVA on service reach across three income bins
+# (b) one-way ANOVA on service reach across three income bins
 groups = [g["accessibility_level"].values for _, g in rq3.groupby("income_bin3") if len(g) >= 2]
 if len(groups) >= 2:
     f, p = stats.f_oneway(*groups)
@@ -249,7 +249,7 @@ if len(groups) >= 2:
     tests.append(["Service reach across three income bins", "Kruskal-Wallis",
                   f"H = {h:.2f}", f"p = {ph:.4f}", "rank-based check on the ANOVA"])
 
-## (c) chi-square on the contingency table
+# (c) chi-square on the contingency table
 chi2, pchi, dof, _ = stats.chi2_contingency(ct.values)
 tests.append(["Service reach by income bin (contingency)", "Chi-square",
               f"chi2 = {chi2:.2f}, df = {dof}", f"p = {pchi:.4f}",
@@ -260,7 +260,7 @@ t2.to_csv("output/table2_hypothesis_tests.csv", index=False)
 print()
 print(t2.to_string(index=False))
 
-## Figure 3
+# Figure 3
 props = (ct.T / ct.sum(axis=1)).T * 100
 order = ["Low / lower-middle", "Upper-middle", "High-income"]
 props = props.reindex([o for o in order if o in props.index])
@@ -280,7 +280,7 @@ for j, col in enumerate(props.columns):
 plt.ylabel("% of countries in the income bin")
 plt.ylim(0, 108)
 plt.title("RQ3. Dementia diagnostic services reach rural areas in most high-income\n"
-          "countries and in none of the low or lower-middle income countries sampled",
+          "countries and in none of the low- or lower-middle-income countries sampled",
           fontsize=11)
 plt.legend(fontsize=8, loc="upper center", ncol=3, frameon=False)
 plt.figtext(0.01, 0.005,
