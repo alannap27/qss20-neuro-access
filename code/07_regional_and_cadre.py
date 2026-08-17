@@ -1,15 +1,15 @@
-## 07_regional_and_cadre.py
-## Takes in : data/raw/atlas_workforce_by_region.csv
-##            data/raw/atlas_workforce_by_income.csv
-##            data/processed/country_panel.csv
-## Does     : two cuts the income-group analysis cannot make. First, the same
-##            gradient by WHO region, with the country-level GDO values overlaid
-##            on the Atlas regional medians. Second, the gradient broken out by
-##            cadre (adult neurologists, neurosurgeons, child neurologists),
-##            which shows the shortage deepening as subspecialisation increases.
-## Outputs  : output/fig8_regional_gradient.png
-##            output/fig9_cadre_gradient.png
-##            output/table5_regional_comparison.csv
+# 07_regional_and_cadre.py
+# Takes in: data/raw/atlas_workforce_by_region.csv
+#           data/raw/atlas_workforce_by_income.csv
+#           data/processed/country_panel.csv
+# Does: two cuts the income-group analysis cannot make. First, the same
+# gradient by WHO region, with the country-level GDO values overlaid
+# on the Atlas regional medians. Second, the gradient broken out by
+# team (adult neurologists, neurosurgeons, child neurologists),
+# which shows the shortage deepening as subspecialization increases.
+# Outputs: output/fig8_regional_gradient.png
+#          output/fig9__gradient.png
+#          output/table5_regional_comparison.csv
 
 import os
 import sys
@@ -30,9 +30,9 @@ by_region = pd.read_csv("data/raw/atlas_workforce_by_region.csv")
 by_income = pd.read_csv("data/raw/atlas_workforce_by_income.csv")
 panel = pd.read_csv("data/processed/country_panel.csv")
 
-## ---------------------------------------------------------------
-## Figure 8 -- regional gradient, Atlas medians with GDO countries overlaid
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# Figure 8: regional gradient, Atlas medians with GDO countries overlaid
+# ---------------------------------------------------------------
 
 reg = by_region[by_region["region_code"] != "Global"].copy()
 reg = reg.sort_values("total_workforce_per100k")
@@ -46,14 +46,14 @@ xs = np.arange(len(reg))
 ax.bar(xs, reg["total_workforce_per100k"], width=0.62, color="#b7c9de",
        edgecolor="#7aa6cf", zorder=2, label="WHO Atlas regional median (all cadres)")
 
-## the bar value sits at the left edge rather than the centre, because the
-## jittered country dots occupy the middle of each bar
+# the bar value sits at the left edge rather than the center, because the
+# jittered country dots occupy the middle of each bar
 for i, (_, r) in enumerate(reg.iterrows()):
     ax.text(i - 0.33, r["total_workforce_per100k"] + 0.22, "%.1f" % r["total_workforce_per100k"],
             ha="left", fontsize=9.5, fontweight="bold")
     ax.text(i, -0.72, "Atlas n = %d" % r["n_total"], ha="center", fontsize=7.5, color="#555555")
 
-## overlay the individual GDO countries that sit in each region
+# overlay the individual GDO countries that sit in each region
 rng = np.random.default_rng(20260803)
 plotted = False
 for i, (_, r) in enumerate(reg.iterrows()):
@@ -88,9 +88,9 @@ plt.tight_layout(rect=[0, 0.062, 1, 1])
 plt.savefig("output/fig8_regional_gradient.png", dpi=200)
 plt.close()
 
-## ---------------------------------------------------------------
-## Figure 9 -- the gradient deepens with subspecialisation
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# Figure 9: the gradient deepens with subspecialization
+# ---------------------------------------------------------------
 
 inc = by_income[by_income["income_group"] != "Global"].copy()
 cadres = [("adult_neurologists_per100k", "Adult neurologists"),
@@ -116,36 +116,36 @@ ax.set_ylabel("Median per 100 000 population (log scale)")
 ax.set_xlabel("World Bank income group")
 ax.legend(fontsize=9, loc="upper left", frameon=False)
 
-## annotate the ratio for each cadre
+# annotate the ratio for each group
 ratios = []
 for col, lab in cadres:
     lo = inc.loc[inc["income_group"] == "Low-income", col].values[0]
     hi = inc.loc[inc["income_group"] == "High-income", col].values[0]
     ratios.append((lab, lo, hi, hi / lo))
-## on a log-scale bar chart every bar runs to the axis floor, so the only
-## reliably empty space is high above the two left-hand groups; the box is
-## placed there in axes coordinates and clears the legend at upper left
+# on a log-scale bar chart every bar runs to the axis floor, so the only
+# is high above the two left-hand groups; the box is placed there
+# in axes coordinates and clears the legend at upper left
 txt = "\n".join("%-20s %4.0fx" % (lab, r) for lab, _, _, r in ratios)
 ax.text(0.31, 0.975, "high- vs low-income ratio\n" + txt,
         transform=ax.transAxes, fontsize=8.5, family="monospace",
         va="top", ha="left",
         bbox=dict(boxstyle="round,pad=0.5", facecolor="#f4f4f4", edgecolor="#bbbbbb"))
 
-ax.set_title("Figure 9. The scarcity gradient steepens with subspecialisation: 62-fold for\n"
+ax.set_title("Figure 9. The scarcity gradient steepens with subspecialization: 62-fold for\n"
              "neurosurgeons, 158-fold for adult neurologists, 195-fold for child neurologists",
              fontsize=12)
 style_axis(ax)
 caption(fig,
-        "Median number of each cadre per 100 000 population by World Bank income group, on a logarithmic vertical axis because the values span four orders of magnitude (0.002 to 4.75). A log axis\n"
+        "Median number of each group per 100,000 population by World Bank income group, on a logarithmic vertical axis because the values span four orders of magnitude (0.002 to 4.75). A log axis\n"
         "makes equal ratios equal distances, so the widening spacing between the three series from left to right is the finding: the rarer the specialism, the steeper the income gradient. Source:\n"
-        "WHO/WFN Atlas: Country Resources for Neurological Disorders, 2nd ed. (2017), Table 3. Response counts differ by cadre (93 to 114 countries) and are reported in table3_atlas_gradients.csv.")
+        "WHO/WFN Atlas: Country Resources for Neurological Disorders, 2nd ed. (2017), Table 3. Response counts differ by group (93 to 114 countries) and are reported in table3_atlas_gradients.csv.")
 plt.tight_layout(rect=[0, 0.062, 1, 1])
 plt.savefig("output/fig9_cadre_gradient.png", dpi=200)
 plt.close()
 
-## ---------------------------------------------------------------
-## Table 5 -- regional comparison of the two instruments
-## ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# Table 5: regional comparison of the two instruments
+# ---------------------------------------------------------------
 
 rows = []
 for _, r in by_region.iterrows():
@@ -166,7 +166,7 @@ t5.to_csv("output/table5_regional_comparison.csv", index=False)
 
 print(t5.to_string(index=False))
 print()
-print("cadre ratios (high-income / low-income):")
+print("Group ratios (high-income / low-income):")
 for lab, lo, hi, r in ratios:
     print("  %-20s %.3f -> %.3f  = %.0fx" % (lab, lo, hi, r))
 print()
